@@ -1,0 +1,27 @@
+---
+- hosts: all
+  become: yes
+  taskes:
+  - name: i want to install git
+    apt:
+      name: git
+      state: present 
+  - name: i want to install tree
+    apt:
+       name: tree
+       state: present     
+
+  - name: i want to install webserver
+    apt:
+      name: apache2 
+      state: present    
+  - name: i want to install web servers on RedHat naode
+    yum:
+       name: httpd
+       state: present
+    when: ansible_os_family =="RedHat"
+  - name: i want to start web servers on RedHat node
+    service:
+       name: httpd
+       state: started
+    when: ansible_os_family =="RedHat"
